@@ -52,9 +52,29 @@
         android:name="android.hardware.faketouch"
         android:required="false" />
 
+    <permission
+        android:name="org.fossify.calendar.permission.LAUNCH_MAIN_ACTIVITY"
+        android:protectionLevel="signature" />
+
+    <permission
+        android:name="org.fossify.calendar.permission.LAUNCH_EVENT_EDITOR"
+        android:protectionLevel="signature" />
+
+    <permission
+        android:name="org.fossify.calendar.permission.LAUNCH_WIDGET_CONFIG"
+        android:protectionLevel="signature" />
+
+    <permission
+        android:name="org.fossify.calendar.permission.CONFIGURE_WIDGET"
+        android:protectionLevel="signature" />
+
+    <permission
+        android:name="org.fossify.calendar.permission.APPWIDGET_UPDATE"
+        android:protectionLevel="signature" />
+
     <application
         android:name=".App"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:appCategory="productivity"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_launcher_name"
@@ -71,6 +91,7 @@
             android:name=".activities.MainActivity"
             android:configChanges="orientation"
             android:exported="true"
+            android:permission="org.fossify.calendar.permission.LAUNCH_MAIN_ACTIVITY"
             android:launchMode="singleTask">
 
             <intent-filter>
@@ -114,6 +135,7 @@
         <activity
             android:name=".activities.WidgetListConfigureActivity"
             android:exported="true"
+            android:permission="org.fossify.calendar.permission.CONFIGURE_WIDGET"
             android:screenOrientation="portrait"
             android:theme="@style/MyWidgetConfigTheme">
             <intent-filter>
@@ -124,6 +146,7 @@
         <activity
             android:name=".activities.WidgetDateConfigureActivity"
             android:exported="true"
+            android:permission="org.fossify.calendar.permission.LAUNCH_WIDGET_CONFIG"
             android:screenOrientation="portrait"
             android:theme="@style/MyWidgetConfigTheme">
             <intent-filter>
@@ -148,6 +171,7 @@
         <activity
             android:name="org.fossify.calendar.activities.EventActivity"
             android:exported="true"
+            android:permission="org.fossify.calendar.permission.LAUNCH_EVENT_EDITOR"
             android:label="@string/new_event"
             android:launchMode="singleTask"
             android:parentActivityName=".activities.MainActivity"
@@ -195,7 +219,7 @@
         <activity
             android:name=".activities.SettingsActivity"
             android:configChanges="orientation"
-            android:exported="true"
+            android:exported="false"
             android:label="@string/settings"
             android:parentActivityName=".activities.MainActivity">
 
@@ -229,6 +253,7 @@
         <receiver
             android:name=".helpers.MyWidgetMonthlyProvider"
             android:exported="true"
+            android:permission="org.fossify.calendar.permission.APPWIDGET_UPDATE"
             android:icon="@drawable/img_widget_monthly_preview"
             android:label="@string/widget_monthly">
             <intent-filter>
