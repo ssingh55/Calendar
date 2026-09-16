@@ -13,6 +13,20 @@ class RescheduleEventsReceiver : BroadcastReceiver() {
     @SuppressLint("UnsafeProtectedBroadcastReceiver")
     override fun onReceive(context: Context, intent: Intent) {
         val action = intent.action ?: return
+
+        val expectedActions = setOf(
+            Intent.ACTION_BOOT_COMPLETED,
+            Intent.ACTION_MY_PACKAGE_REPLACED,
+            Intent.ACTION_TIMEZONE_CHANGED,
+            Intent.ACTION_TIME_CHANGED,
+            "android.intent.action.QUICKBOOT_POWERON",
+            "com.htc.intent.action.QUICKBOOT_POWERON"
+        )
+
+        if (action !in expectedActions) {
+            return
+        }
+
         AppStartupWorker.start(
             context = context,
             replaceExistingWork = action == Intent.ACTION_TIME_CHANGED
